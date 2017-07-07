@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+	<title>0</title>
+<style>
+*{margin:0;padding:0;}
+body{background:#333;}
+canvas{display:block;background:#000;border:8px solid #999;}
+.tips{color:#fff;font-size:16px;}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width=800 height=800></canvas>
+	<p class="tips">按→，←，↑，↓，Q，A，W，S 键，调整物体位置</p>
+
+</body>
+</html>
+<script src="js/Vector3.js"></script>
+<script>
+(function(){
+  var canvas = document.getElementById('canvas');
+  if (!canvas.getContext) return false;
+	var ctx = canvas.getContext('2d');
+	var perspective = 1000;
+	var pos = [new Vector3(-100,100,-100),
+			   new Vector3(-100,-100,-100),
+			   new Vector3(100,-100,-100),
+			   new Vector3(100,100,-100),
+			   
+			   new Vector3(100,100,100),
+			   new Vector3(100,-100,100),
+			   new Vector3(-100,-100,100),
+			   new Vector3(-100,100,100)
+	];
+	
+	
+	
+	
+	var vMove = new Vector3(0,0,0)
+	
+	ctx.strokeStyle = "orange";
+	function update(){
+		
+		var pos_ = [];
+		for(var i =0;i<pos.length;i++){
+			pos[i].add(vMove)
+			
+			//pos[i].rotateX(10)
+			
+			var scale = pos[i].getPerspective(perspective);
+			pos_.push(pos[i].persProjectNew(scale))
+			
+		}
+		
+		ctx.beginPath();
+		for(var i =0 ;i<pos_.length;i++){
+			ctx.lineTo(pos_[i].x+400,pos_[i].y+400);
+		}
+		ctx.clearRect(0,0,800,800);
+		ctx.stroke();
+		
+	}
+	update()
+	
+	document.addEventListener('keydown', function (e) {
+		
+		vMove.x = 0;
+		vMove.y = 0;
+		vMove.z = 0;
+		
+		if (e.keyCode == 37) {
+			console.log('x-')
+			vMove.x = -5;
+		}
+		else if (e.keyCode == 39) {
+			console.log('x+')
+			vMove.x = 5;
+		}
+		else if (e.keyCode == 40) {
+			console.log('y+')
+			vMove.y = 5;
+		}
+		else if (e.keyCode == 38) {
+			console.log('y-')
+			vMove.y = -5;
+		}
+		else if (e.keyCode == 65) {//按A
+			console.log('z-')
+			vMove.z = -5;
+		}
+		else if (e.keyCode == 81) {//按Q
+			console.log('z+')
+			vMove.z = 5;
+		}
+		else if (e.keyCode == 87) {//按W
+			console.log('perspective+')
+			perspective += 5;
+		}
+		else if (e.keyCode == 83) {//按S
+			console.log('perspective-')
+			perspective += -5;
+		}
+		
+		update();
+	}, false)
+	
+	
+	
+	
+})()
+
+
+
+
+    
+</script>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui" />
+	<title>0</title>
+<style>
+*{margin:0;padding:0;}
+body{background:#333;}
+canvas{display:block;background:#000;border:8px solid #999;}
+</style>
+</head>
+<body>
+	<canvas id="canvas" width=800 height=800></canvas>
+	
+
+</body>
+</html>
+<script src="js/Vector3.js"></script>
+<script>
+(function(){
+  var canvas = document.getElementById('canvas');
+  if (!canvas.getContext) return false;
+	var ctx = canvas.getContext('2d');
+	var perspective = 1000;
+	var point = new Vector3(100,100,100);
+			   
+	
+	ctx.strokeStyle = "orange";
+	
+	function update(){
+		
+		var pos_ = null;
+		
+		var scale = point.getPerspective(perspective);
+		pos_ = point.persProjectNew(scale);
+		
+		
+		ctx.beginPath();
+		ctx.lineTo(400,400);
+		ctx.lineTo(pos_.x+400,pos_.y+400);
+		
+		ctx.clearRect(0,0,800,800);
+		ctx.stroke();
+		
+	}
+	update()
+	
+    
+	
+	
+	function addButton(text,callBack){
+		var ele = document.createElement('button');
+		ele.innerHTML = text;
+		document.getElementsByTagName('body')[0].appendChild(ele)
+		ele.onclick = callBack || null;
+		
+	}
+	addButton('rotateX',function(){
+		point.rotateX(45);
+		update()
+	})
+	
+	addButton('rotateY',function(){
+		point.rotateY(45);
+		update()
+	})
+	
+	addButton('rotateZ',function(){
+		point.rotateZ(45);
+		update()
+	})
+	
+	addButton('rotateXY',function(){
+		point.rotateXY(45,45);
+		update()
+	})
+	
+	addButton('rotateXYZ',function(){
+		point.rotateXYZ(45,45,45);
+		update()
+	})
+	
+	
+	addButton('setAngleX',function(){
+		point.setAngleX(45);
+		update()
+	})
+	addButton('setAngleY',function(){
+		point.setAngleY(45);
+		update()
+	})
+	addButton('setAngleZ',function(){
+		point.setAngleZ(45);
+		update()
+	})
+	
+	addButton('getAngleX',function(){
+		alert(point.getAngleX());
+	})
+	addButton('getAngleY',function(){
+		alert(point.getAngleY());
+	})
+	addButton('getAngleZ',function(){
+		alert(point.getAngleZ());
+	})
+	
+	addButton('getLength',function(){
+		alert(point.getLength());
+	})
+	
+	
+	
+	var point1 = new Vector3(200,200,0);
+	var point2 = new Vector3(200,0,0);
+	
+	
+	console.log( point1.angleTo(point2) )
+	console.log( point2.angleTo(point1) )
+	
+	
+	
+	
+	
+})();
+
+
+
+
+    
+</script>
