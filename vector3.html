@@ -24,7 +24,7 @@ canvas{display:block;background:#000;border:8px solid #999;}
 	var ctx = canvas.getContext('2d');
 	var perspective = 1000;
 	var point = new Vector3(100,100,100);
-			   
+	var length = point.getLength();   
 	
 	ctx.strokeStyle = "orange";
 	
@@ -39,6 +39,15 @@ canvas{display:block;background:#000;border:8px solid #999;}
 		ctx.beginPath();
 		ctx.lineTo(400,400);
 		ctx.lineTo(pos_.x+400,pos_.y+400);
+		
+		console.log(((point.z+length)*0.8/(length*2)+0.2))
+		
+		var gnt1 = ctx.createLinearGradient(400,400,pos_.x+400,pos_.y+400);//线性渐变的起止坐标
+		gnt1.addColorStop(0,'rgba(255,255,255,.6)');//创建渐变的开始颜色，0表示偏移量，个人理解为直线上的相对位置，最大为1，一个渐变中可以写任意个渐变颜色
+		//根据空间深度来设置透明度  最小为0.2  最大为1
+		gnt1.addColorStop(1,'rgba(255,255,255,'+ ((point.z+length)*0.8/(length*2)+0.2) +')');
+		ctx.lineWidth=3;
+		ctx.strokeStyle = gnt1;
 		
 		ctx.clearRect(0,0,800,800);
 		ctx.stroke();
