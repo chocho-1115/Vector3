@@ -2,9 +2,7 @@
 ### Vector3.js
 
 ``` javascript
-
 var point = new Vector3(100,100,100);
-
 
 clone
 copy
@@ -54,6 +52,4 @@ angleTo
 getPerspective
 persProject
 persProjectNew
-
-
-```
+``` 
