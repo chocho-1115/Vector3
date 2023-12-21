@@ -1,5 +1,9 @@
+/*! Javascript Library
+ *  杨燚平 email:849890769@qq.com 
+ *  https://github.com/chocho-1115/Vector3
+*/
 var Vector3 = (function () {
-	
+
 	function Vector3 (x, y, z) {
 		this.x = x || 0;
 		this.y = y || 0;
@@ -31,7 +35,6 @@ var Vector3 = (function () {
 		}
 		
 	};
-	
 	
 	Vector3.prototype = {
 		
@@ -342,10 +345,7 @@ var Vector3 = (function () {
 				x: scale*this.x,
 				y: scale*this.y
 			};
-		},
-		
-		
-		
+		}
 	};
 	return Vector3;
 })();
